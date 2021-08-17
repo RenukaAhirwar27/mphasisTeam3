@@ -14,6 +14,8 @@ class Process{
 		data.set(1,"Z");
 		data.remove(4);
 		return data;
+
+
 	}
 }
 class Point{
@@ -64,7 +66,7 @@ class Point{
 public class Main {
 
     public static void main(String[] args) {
-	Process process = new Process();
+	/*Process process = new Process();
 	List<String> result = process.getElements();
 	for(String string:result){
 		System.out.println(string);
@@ -82,8 +84,35 @@ public class Main {
 		hashSet.add(new Point(2,4));
 		hashSet.add(new Point(2,4));
 
-		System.out.println(hashSet);
+		System.out.println(hashSet);   */
 
+		HashMap<String,Integer> companyDetails = new HashMap<String,Integer>();
+		companyDetails.put("John Smith",13000);
+		companyDetails.put("Sandra Dee",13000);
+		companyDetails.put("Mathew",13000);
+		companyDetails.put("David",13000);
+		companyDetails.put("Allen",13000);
 
+		Integer salary = companyDetails.get("Joe");
+		System.out.println(salary);
+
+		Set<Map.Entry<String,Integer>> paymentDetails = companyDetails.entrySet();
+		for(Map.Entry<String,Integer> entrySet:paymentDetails){
+			System.out.println(entrySet.getKey()+">>>>"+entrySet.getValue());
+		}
+		Iterator<Map.Entry<String,Integer>> iterator = paymentDetails.iterator();
+
+		while(iterator.hasNext()){
+			Map.Entry keyValue = iterator.next();
+			System.out.println("Key : "+keyValue.getKey()+", Value: "+keyValue.getValue());
+		}
+
+		Set<String> keys = companyDetails.keySet();
+		Iterator<String> keyIterator = keys.iterator();
+
+		while(keyIterator.hasNext()){
+			String key = keyIterator.next();
+			System.out.println("Key :"+key+ ",value :"+companyDetails.get(key));
+		}
     }
 }

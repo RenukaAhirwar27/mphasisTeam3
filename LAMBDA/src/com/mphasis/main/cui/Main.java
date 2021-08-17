@@ -12,6 +12,9 @@ interface Transformer{
 interface Aggregate{
     String combine(String s1,String s2);
 }
+interface Logging{
+	public void audit(Level level,String msg);
+}
 public class Main {
 
     public static void main(String[] args) {
@@ -32,6 +35,12 @@ public class Main {
 
 	Aggregate aggregate = (txt1,txt2) -> txt1.concat(txt2);
 	System.out.println(aggregate.combine("Mph","asis"));
+
+	Logging logger1 = Logger.getLogger(Main.class.getName())::log; //method reference
+	logger1.audit(Level.SEVERE,"Test1");
+
+	Logging logger2 = (level,text) -> Logger.getLogger(Main.class.getName()).log(level,text); //lambda
+	logger2.audit(Level.SEVERE,"Test1");
 
 	new Thread(() -> System.out.println(Thread.currentThread())).start(); // ()before -> represents run method
     }
