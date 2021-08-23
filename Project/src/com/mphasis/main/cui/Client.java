@@ -2,6 +2,8 @@ package com.mphasis.main.cui;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Client {
 
@@ -41,6 +43,10 @@ public class Client {
             case "FEED":
                 System.out.println("Starting feed method call...");
                 startFeed(clientID, port);
+//                int virtualCPU = Runtime.getRuntime().availableProcessors();
+//                ExecutorService service = Executors.newCachedThreadPool();
+//                service.execute(new ClientGatewayReader());
+
                 //	new Thread(	new ClientGatewayReader()).start();
 
                 break;
@@ -91,7 +97,7 @@ public class Client {
             int action = Integer.parseInt(command);
             switch(action){
                 case 1:
-                    //creat order
+                    //create order
                     System.out.println("Order Entry:  [BUY/SELL] | [quantity] | [price]");
                     String order = c.readLine();
                     String[] orderArray = order.split("\\|");
@@ -119,7 +125,6 @@ public class Client {
                     //request market data
                     System.out.println("Requesting market data...");
                     output.println(clientID + "|" + "MarketData");
-
 
                     break;
                 case 4:

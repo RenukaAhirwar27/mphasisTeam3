@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.PriorityQueue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.*;
 
 public class Exchange {
 
@@ -22,7 +20,7 @@ public class Exchange {
 
     public static void main(String args[]) throws IOException {
 
-        //Read port from stdinput
+        //Read port from std input
         // Then init one Exchange object.  this will create all the message queues and order structs
         //  call runServer
         int port = Integer.parseInt(args[0]);
@@ -36,7 +34,6 @@ public class Exchange {
         // constructor for our main exchange
         orderbook = new ConcurrentHashMap<Double, PriorityQueue<Order>>();
         clientFeeds = new ConcurrentHashMap<String, Connection>();
-
 
     }
     public void runServer(int port) throws IOException{
@@ -53,8 +50,12 @@ public class Exchange {
                 System.out.println("Error connecting to client");
             }
 
-            new Thread(
-                    new Connection(clientSock, this) ).start();
+            int vCPU = Runtime.getRuntime().availableProcessors();
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.execute(new Connection(clientSock,this));
+
+            //new Thread(
+             //       new Connection(clientSock, this) ).start();
 
 
 
@@ -189,7 +190,7 @@ public class Exchange {
     public void cancelOrder(String clientID, String orderID)
     {
 
-        // iterate through the orderbook until you find the ORDER ID
+        // iterate through the order book until you find the ORDER ID
         // when you do find it, remove it
         //then send message to the client.
         for ( ConcurrentMap.Entry<Double, PriorityQueue<Order> > priceLevel : orderbook.entrySet())
@@ -197,7 +198,7 @@ public class Exchange {
 
             for (Order individualOrder : priceLevel.getValue())
             {
-                System.out.println("COmparing order id " + individualOrder.orderID.toString() + " to order id " + orderID);
+                System.out.println("Comparing order id " + individualOrder.orderID.toString() + " to order id " + orderID);
 
                 if( individualOrder.orderID.toString().equals(orderID) )
                 {

@@ -156,7 +156,7 @@ public class Connection implements Runnable {
 
     public void runFeed() throws IOException{
         // wait for messages to be put in this connections 'queue'
-        // transmist message to client.
+        // transmit message to client.
         System.out.println("Registering client with exchange..." + this.toString());
         exchange.registerClientFeed(clientID, this);
         // out = new PrintWriter(conn.getOutputStream(), true);
