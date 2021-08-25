@@ -7,13 +7,10 @@ import org.junit.Test;
 import static org.mockito.Mockito.when;
 
 public class Calculate {
-//    double x;
-//    double y;
 
-   // Calculate calculate1 = new Calculate();
-    public int getValue(){
-      return 9;
-    }
+//    public int getValue(){
+//      return 9;
+//    }
 
 }
 

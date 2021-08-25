@@ -68,21 +68,14 @@ public class Main {
     CalculatorService calculatorService;
 
     @InjectMocks
-    Calculate calculate; //=new Calculate();
+    Calculate calculate;
 
-    //@Test(expected = RuntimeException.class)
-
-//    @Test
-//    public void testAdd() {
-//        //add the behavior to throw exception
-//        doThrow(new RuntimeException("Add operation not implemented"))
-//                //.when(calculatorService.add(4,5));
-//        .when(calculate.getValue().add(4,5));
-//        int value = calculatorService.add(4,5);
-//        //int value = calculate.getValue().add(4,5);
-//        //test the add functionality
-//        Assert.assertEquals(9,value,0);
-//    }
+    @Test(expected = RuntimeException.class)
+    public void testAdd() {
+        doThrow(new RuntimeException("Add operation not implemented")).when(calculatorService).add(4,5);
+        int value = calculatorService.add(4,5);
+        Assert.assertEquals(9,value,0);
+    }
 
     @Test
     public void AddTest() {
