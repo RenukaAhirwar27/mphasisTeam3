@@ -150,7 +150,6 @@ public class Client {
         System.out.println("2 : Cancel Order" );
         System.out.println("3 : Request Market Data");
         System.out.println("4 : Quit");
-
     }
 
     public static void startFeed(String clientID, int port) throws IOException{
