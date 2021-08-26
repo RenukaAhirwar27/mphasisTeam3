@@ -2,6 +2,7 @@ package com.mphasis.entities;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="EMPLOYEE")
@@ -16,6 +17,8 @@ public class Employee {
     private String lastName;
     @Column(name="SALARY")
     private int salary;
+    @Column(name = "CERTIFICATE")
+    private Set certificates;
 
     public Employee() {}
     public Employee(String fname, String lname, int salary) {
@@ -54,5 +57,13 @@ public class Employee {
 
     public void setSalary( int salary ) {
         this.salary = salary;
+    }
+
+    public Set getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(Set certificates) {
+        this.certificates = certificates;
     }
 }

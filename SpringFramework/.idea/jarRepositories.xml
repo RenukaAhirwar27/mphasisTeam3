@@ -16,10 +16,5 @@
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
-    <remote-repository>
-      <option name="id" value="ojdbc6" />
-      <option name="name" value="ojdbc6" />
-      <option name="url" value="https://www.datanucleus.org/downloads/maven2/" />
-    </remote-repository>
   </component>
 </project>
